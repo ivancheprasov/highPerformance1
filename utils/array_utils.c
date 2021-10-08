@@ -34,7 +34,7 @@ int *sort_parallel(int *array, int length, int *(*algorithm)(int *array, int len
     int *result = malloc(length * sizeof(int));
     int **result_array = malloc(thread_num * sizeof(int *));
     int part_length[thread_num];
-#pragma omp parallel default(none) shared(array, result, result_array, part_length, thread_num, algorithm, length)
+#pragma omp parallel default(none) num_threads(thread_num) shared(array, result, result_array, part_length, thread_num, algorithm, length)
     {
         int thread_id = omp_get_thread_num();
         part_length[thread_id] = length / thread_num;
